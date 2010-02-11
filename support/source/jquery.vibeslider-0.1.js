@@ -168,7 +168,7 @@
 			// save value
 			this.value = value.roundTo(this.opts.roundTo);
 			// set knob position function
-			var desiredSpace = (this.size - this.knobSize) * value / (this.opts.maxValue - this.opts.minValue);
+			var desiredSpace = (this.size - this.knobSize) * (value - this.opts.minValue) / (this.opts.maxValue - this.opts.minValue);
 			this.knobSpace = desiredSpace;
 			if (this.orientation === 0){
 				this.knob.css('left', desiredSpace + 'px');
