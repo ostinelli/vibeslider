@@ -1,5 +1,5 @@
 ==============================================================================
-vibeSlide - A small JQuery Slider plugin.
+vibeSlider - A small JQuery Slider plugin.
 <http://code.google.com/p/vibeslide/>
 
 Copyright (C) 2010, Roberto Ostinelli (ostinelli.net).
