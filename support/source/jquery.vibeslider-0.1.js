@@ -1,7 +1,7 @@
 /**
  *  jQuery vibeSlider  Plugin
  *  @requires jQuery v1.3
- *  http://code.google.com/p/vibeslide/
+ *  http://code.google.com/p/vibeslider/
  *
  *  Copyright (c)  Roberto Ostinelli (ostinelli.net)
  *  Released under the MIT license:
