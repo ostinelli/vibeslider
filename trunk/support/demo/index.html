@@ -1,0 +1,43 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD HTML 4.01//EN"
+	"http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<title>VibeChat Demo</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<link rel="stylesheet" type="text/css" href="includes/slider.css">
+	<script type="text/javascript" src="includes/jquery-1.4.min.js"></script>
+	<script type="text/javascript" src="includes/jquery.vibeslider-0.1.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		// horizontal slider -> minimal implementation
+		$('#slider-h').vibeSlider();
+		// vertical slider -> full implementation
+		$('#slider-v').vibeSlider({
+			minValue: 10,
+			maxValue: 210,
+			value: 100,
+			roundTo: 2,
+			slide: function(value){$('#status-v').html(value);},
+			click: function(e){$('#status-v').html('clicked');},
+			start: function(value){$('#status-v').html('start sliding at value: ' + value);},
+			end: function(value){$('#status-v').html('end sliding at value: ' + value);}
+		});
+	});
+</script>
+
+</head>
+<body>
+
+<div id="slider-h"></div>
+<input type="button" onclick="alert($('#slider-h').vibeSlider('value'));" value="get value" />
+<br><br><br>
+
+<div id="slider-v"></div>
+<div id="status-v"></div>
+<input type="button" onclick="alert($('#slider-v').vibeSlider('value'));" value="get value" />
+<br><br><br>
+
+
+</body>
+</html>
