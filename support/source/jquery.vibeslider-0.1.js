@@ -50,6 +50,14 @@
 			this.knob.css('cursor', 'pointer');
 			this.knob.css('margin', '0');
 			this.knob.css('padding', '0');
+			// prefent image drag: mozilla
+			this.knob.mousedown(function(e){
+				if (e.preventDefault){
+					e.preventDefault();
+				}
+			});
+			// prefent image drag: IE and webkit
+			this.knob[0].ondragstart = function(){ return false;};
 			// get knob width on window load -> safari issue
 			$(window).load(function(){
 				self.initOnLoad();
