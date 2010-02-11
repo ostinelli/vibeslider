@@ -19,7 +19,7 @@
 	}
 	Number.prototype.roundTo = roundTo;
 	// vibeSlider constructor
-	var vibeSliderObj = function() { this.initialize.apply(this, arguments); };
+	var vibeSliderObj = function(){this.initialize.apply(this, arguments);};
 	vibeSliderObj.prototype = {
 		// variables
 		value: 0,
@@ -74,7 +74,7 @@
 			} else {
 				if (this.opts.orientation == 'vertical'){this.orientation = 1;}
 			}
-			var p = this.$this.position();
+			var p = this.$this.offset();
 			if (self.orientation === 0){
 				this.space = p.left;
 				this.size = width;
@@ -143,11 +143,19 @@
 			// click
 			this.$this.click(function(e){
 				self.opts.click.call(this, e);
+				// element is visible, compute offset which is otherwise 0
+				var p = self.$this.offset();
+				if (self.orientation === 0){
+					self.space = p.left;
+				} else {
+					self.space = p.top;
+				}
 				if (self.orientation === 0){
 					dragFun(e.pageX - self.space - (self.knobSize / 2));
 				} else {
 					dragFun(self.space + self.size - e.pageY - (self.knobSize / 2));
 				}
+				self.opts.end.call(self, self.value);
 			});
 			// attach the instance of this object to the jQuery wrapped DOM node
 			this.$this.data('vibeSliderObj', this);
@@ -156,7 +164,7 @@
 		/*******************************************
 		  * set value
 		  */
-		setValue: function(value){
+		setValue: function(value){	
 			// save value
 			this.value = value.roundTo(this.opts.roundTo);
 			// set knob position function
