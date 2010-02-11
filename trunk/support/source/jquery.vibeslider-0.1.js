@@ -26,7 +26,7 @@
 		size: 0,
 		knobSize: 0,
 		knobSpace: 0,
-		orientation: null,	// 0: horizontal, 1: vertical
+		orientation: 0,	// 0: horizontal, 1: vertical
 		knobMouseDelta: 0,
 		dragging: false,
 		space: 0,
@@ -50,30 +50,25 @@
 			this.knob.css('cursor', 'pointer');
 			this.knob.css('margin', '0');
 			this.knob.css('padding', '0');
-			// prefent image drag: mozilla
+			// prevent image drag: mozilla
 			this.knob.mousedown(function(e){
 				if (e.preventDefault){
 					e.preventDefault();
 				}
 			});
-			// prefent image drag: IE and webkit
-			this.knob[0].ondragstart = function(){ return false;};
-			// get knob width on window load -> safari issue
-			$(window).load(function(){
-				self.initOnLoad();
-			});
-		},
-		
-		/*******************************************
-		  * continue init
-		  */
-		initOnLoad: function(){
-			// self
-			var self = this;
+			// prevent image drag: IE and webkit
+			this.knob[0].ondragstart = function(){return false;};
 			// get orientation
-			this.orientation = 0;
+			var width = parseInt(this.$this.css('width'), 10);
+			if (width === 0){
+				width = this.$this.width();
+			}
+			var height = parseInt(this.$this.css('height'), 10);
+			if (height === 0){
+				height = this.$this.height();
+			}			
 			if (this.opts.orientation == 'auto'){
-				if (this.$this.width() < this.$this.height()){
+				if (width < height){
 					this.orientation = 1;
 				}
 			} else {
@@ -82,12 +77,18 @@
 			var p = this.$this.position();
 			if (self.orientation === 0){
 				this.space = p.left;
-				this.size = this.$this.width();
-				this.knobSize = this.knob.width();
+				this.size = width;
+				this.knobSize = parseInt(this.knob.css('width'), 10);
+				if (this.knobSize === 0){
+					this.knobSize = this.knob.width();
+				}
 			} else {
 				this.space = p.top;
-				this.size = this.$this.height();
-				this.knobSize = this.knob.height();
+				this.size = height;
+				this.knobSize = parseInt(this.knob.css('height'), 10);
+				if (this.knobSize === 0){
+					this.knobSize = this.knob.height();
+				}
 			}
 			// set original value
 			this.setValue(this.opts.value);
